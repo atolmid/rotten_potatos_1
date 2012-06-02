@@ -14,6 +14,7 @@ class MoviesController < ApplicationController
         [Movie.all(:order=>'release_date'), 'date']
     else
         [@movies = Movie.all]
+    end
   end
 
   def new
