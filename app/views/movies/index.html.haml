@@ -4,9 +4,9 @@
 %table#movies
   %thead
     %tr
-      %th Movie Title
-      %th Rating
-      %th Release Date
+      %th {:id = ('title' == @col :"hlite" : nil} link_to "Movie Title", movies_path('title')   
+      %th Rating 
+      %th {:id = ( 'date' == @col :"hlite" : nil} link_to "Release Date", movies_path('date') 
       %th More Info
   %tbody
     - @movies.each do |movie|
