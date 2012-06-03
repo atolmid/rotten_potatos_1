@@ -7,11 +7,11 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @col = case params[:sort]
+    @order = case params[:sort_by]
     when "title"
-        [Movie.all(:order=>'title'), 'title']
-    when "release_date"
-        [Movie.all(:order=>'release_date'), 'date']
+        [@movies = Movie.all(:order =>'title'), "title"]
+    when "date"
+        [@movies = Movie.all(:order=>'release_date'), 'date']
     else
         [@movies = Movie.all]
     end
