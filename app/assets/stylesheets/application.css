@@ -34,7 +34,7 @@ h1.title {
   font-style: normal;
 }
 
-table#movies th#hilite {
+table#movies th.hilite {
       background-color: yellow;
 }
 
