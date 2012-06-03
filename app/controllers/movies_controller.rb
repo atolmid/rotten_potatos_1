@@ -9,9 +9,11 @@ class MoviesController < ApplicationController
   def index
     @order = case params[:sort_by]
     when "title"
-        [@movies = Movie.all(:order =>'title'), "title"]
+        [@col = 'title',
+         @movies = Movie.all(:order =>'title')]
     when "date"
-        [@movies = Movie.all(:order=>'release_date'), 'date']
+        [@col = 'date',
+        @movies = Movie.all(:order=>'release_date'),'date']
     else
         [@movies = Movie.all]
     end
