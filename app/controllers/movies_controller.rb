@@ -10,12 +10,15 @@ class MoviesController < ApplicationController
     @order = case params[:sort_by]
     when "title"
         [@col = 'title',
+        @all_ratings = Movie.ratings,
          @movies = Movie.all(:order =>'title')]
     when "date"
         [@col = 'date',
+        @all_ratings = Movie.ratings,
         @movies = Movie.all(:order=>'release_date'),'date']
     else
-        [@movies = Movie.all]
+        [@all_ratings = Movie.ratings,
+        @movies = Movie.all]
     end
   end
 
