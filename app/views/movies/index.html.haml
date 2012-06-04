@@ -6,7 +6,6 @@
   Include:
   - @all_ratings.each do |rating|
     = rating
-    = @sel_ratings.include?(rating)
     = check_box_tag "ratings[#{rating}]", true, checked?(rating), :id=>'ratings_#{rating}'
   = submit_tag 'Refresh', :id => "ratings_submit"
 
