@@ -16,16 +16,16 @@ class MoviesController < ApplicationController
         [@col = 'title',
         @sel_ratings = selected,
         @all_ratings = Movie.ratings,
-         @movies = Movie.find_all_by_rating(rating, :order =>'title')]
+        @movies = Movie.find_all_by_rating(rating, :order =>'title')]
     when "date"
         [@col = 'date',
         @all_ratings = Movie.ratings,
-        @movies = Movie.all(:order=>'release_date'),'date']
-    else
-        [@a = @a,
         @sel_ratings = selected,
+        @movies = Movie.find_all_by_rating(rating, :order=>'release_date')]
+    else
+        [@sel_ratings = selected,
         @all_ratings = Movie.ratings,
-         @movies = Movie.find_all_by_rating(rating)]
+        @movies = Movie.find_all_by_rating(rating)]
     end
   end
 
