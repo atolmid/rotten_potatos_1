@@ -8,10 +8,11 @@ class MoviesController < ApplicationController
 
   def index
     rating = Movie.ratings,
-    (params[:ratings] == nil) ? rating = Movie.ratings : rating = params[:ratings].to_hash.keys,
+    (params[:ratings] == nil) ? rating = Movie.ratings : (rating = params[:ratings].to_hash.keys ; session[:ratings] = params[:ratings]),
     (params[:ratings] == nil) ? selected = ["none"] : selected = rating,
+    (params[:sort_by] == nil) ? order = session[:sort_by] : (session[:sort_by] = params[:sort_by] ; order = params[:sort_by]),
     
-    @order = case params[:sort_by]
+    @order = case order
     when "title"
         [@col = 'title',
         @sel_ratings = selected,
