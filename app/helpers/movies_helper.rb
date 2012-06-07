@@ -9,7 +9,14 @@ module MoviesHelper
   end
   
   def ratings_s(ratings)
-    (ratings == nil) ? ratings = session[:ratings].to_hash.keys : (ratings=ratings)
+    (ratings == nil) ? ((session[:ratings]==nil) ? rating = Movie.ratings : ratings = session[:ratings].to_hash.keys) : (ratings=ratings)
+  end
+  
+  def path(sort,ratings)
+    (sort==nil) ? sort = session[:sort_by] : sort = sort
+    (session[:ratings]==nil) ? session[:ratings] = Movie.ratings : session[:ratings] = session[:ratings]
+    (ratings == nil) ? ratings = session[:ratings] : ratings = ratings
+    redirect_to movie_path({:sort_by=>sort, :ratings=>ratings})
   end
   
 end

@@ -2,12 +2,13 @@
 -#= debug @ratings
 %h1 All Movies
 - ratings = Hash.new
-= form_tag movies_path(:sort_by=>session[:sort_by],:ratings=>session[:ratings]), :method => :get do
+= form_tag movies_path(:sort_by=>session[:sort_by],:ratings=>ratings), :method => :get do
   Include:
   - @all_ratings.each do |rating|
     = rating
     = check_box_tag "ratings[#{rating}]", true, checked?(rating), :id=>"ratings_#{rating}"
     - (checked?(rating) ? ratings["#{rating}]"] = "ratings[#{rating}]" : k ="1")
+    - session[:ratings] = ratings
   = submit_tag 'Refresh', :id => "ratings_submit"
 
 %table#movies
