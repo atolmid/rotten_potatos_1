@@ -8,19 +8,23 @@ class MoviesController < ApplicationController
 
   def index
     rating = Movie.ratings,
-    (params[:ratings] == nil) ? rating = Movie.ratings : rating = params[:ratings].to_hash.keys,
-    (params[:ratings] == nil) ? selected = ["none"] : selected = rating,
+    (params[:ratings] == nil) ? ((session[:ratings]==nil) ? rating = Movie.ratings : rating = session[:ratings].to_hash.keys) : rating = params[:ratings].to_hash.keys,
+    selected = rating,
+    session[:ratings] = params[:ratings],
+    (params[:sort_by] == nil) ? @order = session[:ratings] : @order = params[:sort_by],
     
-    @order = case params[:sort_by]
+    order = case @order
     when "title"
         [@col = 'title',
         @sel_ratings = selected,
         @all_ratings = Movie.ratings,
+        session[:sort_by=>"title"],
         @movies = Movie.find_all_by_rating(rating, :order =>'title')]
     when "date"
         [@col = 'date',
         @all_ratings = Movie.ratings,
         @sel_ratings = selected,
+        session[:sort_by=>"date"],
         @movies = Movie.find_all_by_rating(rating, :order=>'release_date')]
     else
         [@sel_ratings = selected,
