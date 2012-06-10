@@ -1,5 +1,5 @@
 -#  This file is app/views/movies/index.html.haml
-= debug session[:ratings]
+#= debug session[:ratings]
 %h1 All Movies
 - ratings = Hash.new
 = form_tag movies_path(:sort_by=>session[:sort_by],:ratings=>ratings), :method => :get do
