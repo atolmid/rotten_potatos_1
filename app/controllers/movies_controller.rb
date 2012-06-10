@@ -7,11 +7,14 @@ class MoviesController < ApplicationController
   end
 
   def index
-    rating = Movie.ratings,
-    (params[:ratings] == nil) ? rating = Movie.ratings : (rating = params[:ratings].keys ; session[:ratings] = params[:ratings]),
+    redir = false,
+    (params[:ratings] == nil) ? (((session[:ratings]== nil) ? rating = Movie.ratings : rating = session[:ratings].keys) ; redir = true) : (rating = params[:ratings].keys ; session[:ratings] = params[:ratings]),
     (params[:ratings] == nil) ? selected = ["none"] : selected = rating,
-    (params[:sort_by] == nil) ? order = session[:sort_by] : (session[:sort_by] = params[:sort_by] ; order = params[:sort_by]),
+    (params[:sort_by] == nil) ? (((session[:sort_by]==nil)? order = "none" : order = session[:sort_by]) ; redir = true) : (session[:sort_by] = params[:sort_by] ; order = params[:sort_by]),
     
+    if ( (!params[:ratings] && !params[:sort_by]) && (session[:ratings] || session[:sort_by]))
+      redirect_to movies_path(:sort_by => session[:sort_by], :ratings => session[:ratings])
+    end
     @order = case order
     when "title"
         [@col = 'title',

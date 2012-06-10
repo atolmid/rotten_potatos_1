@@ -7,7 +7,7 @@
   - @all_ratings.each do |rating|
     = rating
     = check_box_tag "ratings[#{rating}]", true, checked?(rating), :id=>"ratings_#{rating}"
-    - (checked?(rating) ? ratings["#{rating}]"] = "true" : k ="1")
+    - (checked?(rating) ? ratings["#{rating}"] = "true" : k ="1")
     - session[:ratings] = ratings
   = submit_tag 'Refresh', :id => "ratings_submit"
 
